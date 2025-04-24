@@ -157,6 +157,11 @@ class CallbackAdapter : public rclcpp::Waitable
 public:
   explicit CallbackAdapter(std::shared_ptr<rclcpp::Context> context_ptr);
 
+  std::vector<std::shared_ptr<rclcpp::TimerBase>> get_timers() const override
+  {
+    return {};
+  }
+
   /**
    * @brief tell the CallbackGroup how many guard conditions are ready in this waitable
    */
