@@ -22,6 +22,7 @@ find_package(rclcpp REQUIRED)
 find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(glog REQUIRED)
+find_package(gtest_vendor)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(suitesparse-extras.cmake)

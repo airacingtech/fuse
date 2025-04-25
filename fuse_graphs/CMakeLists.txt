@@ -17,6 +17,7 @@ find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 
 find_package(Ceres REQUIRED)
+find_package(gtest_vendor)
 
 include(boost-extras.cmake)
 

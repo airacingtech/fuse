@@ -22,7 +22,7 @@ find_package(rviz_rendering REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
 find_package(Eigen3 REQUIRED)
-
+find_package(gtest_vendor)
 find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 ###########

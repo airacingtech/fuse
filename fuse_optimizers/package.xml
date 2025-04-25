@@ -16,11 +16,13 @@
   <author email="swilliams@locusrobotics.com">Stephen Williams</author>
   <author email="tmoore@locusrobotics.com">Tom Moore</author>
 
-  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>ament_cmake_ros</depend>
   <depend>boost</depend>
-  <depend>libceres-dev</depend>
   <depend>eigen</depend>
+  <depend>gtest_vendor</depend>
+  <depend>libceres-dev</depend>
 
   <build_depend>diagnostic_updater</build_depend>
   <build_depend>fuse_constraints</build_depend>
