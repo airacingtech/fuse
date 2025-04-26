@@ -2,8 +2,8 @@
 Changelog for package fuse_models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.2.2 (2025-04-26)
+------------------
 * * Added dependencies in required CMakeLists.txt and package.xml files
   * Added ament_cmake_ros and gtest_vendor dependencies
   * Removed duplicate package depends, alphabetized lists
