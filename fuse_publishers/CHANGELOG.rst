@@ -2,6 +2,18 @@
 Changelog for package fuse_publishers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* * Added dependencies in required CMakeLists.txt and package.xml files
+  * Added ament_cmake_ros and gtest_vendor dependencies
+  * Removed duplicate package depends, alphabetized lists
+  See https://www.linkedin.com/posts/open-source-robotics-foundation_were-looking-for-half-a-dozen-new-open-activity-7317690134764605440-jm3h/
+  Author: KB1110 <kartikbakshi10@gmail.com>
+* [RST-7809] Port fix for negative pi initial conditions from ROS1 to ROS2 (`#335 <https://github.com/locusrobotics/fuse/issues/335>`_)
+  * Add some unit tests for the 2D orientation constraints; Create getters/setters for the 2D orientation variable is preparation for a fix.
+  * Force the 2D orientation value to be is minimum phase
+* Contributors: KB1110, Stephen Williams
+
 1.2.1 (2024-09-21)
 ------------------
 

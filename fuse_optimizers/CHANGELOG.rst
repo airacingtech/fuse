@@ -2,6 +2,25 @@
 Changelog for package fuse_optimizers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* * Added dependencies in required CMakeLists.txt and package.xml files
+  * Added ament_cmake_ros and gtest_vendor dependencies
+  * Removed duplicate package depends, alphabetized lists
+  See https://www.linkedin.com/posts/open-source-robotics-foundation_were-looking-for-half-a-dozen-new-open-activity-7317690134764605440-jm3h/
+  Author: KB1110 <kartikbakshi10@gmail.com>
+* Fix build and linter warnings (`#405 <https://github.com/locusrobotics/fuse/issues/405>`_)
+* Port graph printing on optimization failures from ROS1 to ROS2 (`#332 <https://github.com/locusrobotics/fuse/issues/332>`_)
+  Port the printing of the graph and transaction with an optimization failure occurs (`#321 <https://github.com/locusrobotics/fuse/issues/321>`_) from ROS1 to ROS2
+* Port the 'add reset to batch optimizer' patch from ROS 1 to ROS 2 (`#361 <https://github.com/locusrobotics/fuse/issues/361>`_)
+* Fix warning message (`#389 <https://github.com/locusrobotics/fuse/issues/389>`_)
+  * Fix timestamp format in warning messages
+* Prevent optimizer thread from calling notify on stopped publishers (`#393 <https://github.com/locusrobotics/fuse/issues/393>`_)
+  * Prevent optimizer thread from calling notify on stopped publishers
+  * Fix tests
+  * Fix uncrustify issue
+* Contributors: Carlos Mendes, KB1110, Patrick Roncagliolo, Stephen Williams
+
 1.2.1 (2024-09-21)
 ------------------
 
