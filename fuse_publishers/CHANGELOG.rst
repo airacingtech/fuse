@@ -2,8 +2,8 @@
 Changelog for package fuse_publishers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.2.3 (2025-05-24)
+------------------
 * Fix linter errors related to header ordering (`#407 <https://github.com/locusrobotics/fuse/issues/407>`_)
 * Removed deprecations warnings (`#406 <https://github.com/locusrobotics/fuse/issues/406>`_)
 * Contributors: Alejandro Hernández Cordero, Stephen Williams
