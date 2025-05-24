@@ -2,6 +2,9 @@
 Changelog for package fuse_doc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.2.2 (2025-04-26)
 ------------------
 * * Added dependencies in required CMakeLists.txt and package.xml files
