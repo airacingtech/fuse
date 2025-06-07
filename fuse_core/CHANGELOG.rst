@@ -100,8 +100,8 @@ Changelog for package fuse_core
 * Added a time-limited optimization option to the Graph class (#234)
 * Contributors: Enrique Fernandez Perdomo, Gary Servin, Stephen Williams, Tom Moore
 
-Forthcoming
------------
+0.12.0 (2025-06-06)
+-------------------
 * [Issue-300] Handle prior on last stamp (#323)
   * Added unit test to illustrate the bug from Issue #300
   * Move where the input variables are updated to the motion model values to ensure that transactions that involve only a single timestamp are correctly handled

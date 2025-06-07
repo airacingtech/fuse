@@ -43,8 +43,8 @@ Changelog for package fuse_optimizers
 * [RST-3451] Cleaned up condition variable usage
 * Contributors: Enrique Fernandez Perdomo, Gary Servin, Stephen Williams, Tom Moore
 
-Forthcoming
------------
+0.12.0 (2025-06-06)
+-------------------
 * Prevent optimization thread from doing its work when a stop was requested (#391)
 * Contributors: Carlos Mendes
 
