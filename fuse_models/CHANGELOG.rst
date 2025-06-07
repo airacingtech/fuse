@@ -47,6 +47,23 @@ Changelog for package fuse_models
 * [RST-3451] Delay some transform warnings so startup is less chatty
 * Contributors: Enrique Fernandez Perdomo, Gary Servin, Stephen Williams, Tom Moore, fabianhirmann
 
+Forthcoming
+-----------
+* Cast nullptr to type for manifold support (#370)
+  Co-authored-by: Jake McLaughlin <jmclaughlin@ottomotors.com>
+* Only instantiate tf_listeners if needed (#395)
+  - We find that the transform listeners in sensor models are negatively
+  impacting performance
+  - Do not instantiate transform listeners if target frames are empty
+  - Target frames are empty by default
+  - Existing logic already does not do the transforms when target frames
+  are empty
+* Imu2D: Use transformed twist when computing covariance (#394)
+  * Fix Imu2D to use transformed twist in covariance
+  ---------
+  Co-authored-by: Dan Murphy <dmurphy@ottomotors.com>
+* Contributors: Dan Murphy, Jake McLaughlin
+
 0.11.0 (2025-02-04)
 -------------------
 * Fixing issue with Eigen in Ubuntu Jammy on ARM (#378)

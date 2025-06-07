@@ -70,6 +70,14 @@ Changelog for package fuse_variables
   Co-authored-by: Jake McLaughlin <jake.mclaughlin98@gmail.com>
 * Contributors: Gary Servin, Stephen Williams, Tom Moore
 
+Forthcoming
+-----------
+* [RST-12952] Modified the loadDeviceId() function to accept optional parameters (#408)
+  * Modified the loadDeviceId() function to accept optional parameter names for the device UUID and device name
+* Update orientation_3d_stamped.h (#385)
+  * Update orientation_3d_stamped.h description of Orientation3DManifold
+* Contributors: Jake McLaughlin, Stephen Williams
+
 0.11.0 (2025-02-04)
 -------------------
 
