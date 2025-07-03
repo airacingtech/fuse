@@ -15,9 +15,16 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(SuiteSparse REQUIRED COMPONENTS CCOLAMD)
+
+find_package(Ceres QUIET)
+if(NOT Ceres_FOUND)
+    find_package(ceres-solver QUIET)
+    if(NOT ceres-solver_FOUND)
+        message(FATAL_ERROR "Neither Ceres nor ceres-solver found!")
+    endif()
+endif()
 
 catkin_package(
   INCLUDE_DIRS

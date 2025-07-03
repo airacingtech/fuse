@@ -11,10 +11,17 @@ find_package(catkin REQUIRED COMPONENTS
   ${build_depends}
 )
 find_package(Boost REQUIRED COMPONENTS serialization)
-find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(libglog REQUIRED)
+
+find_package(Ceres QUIET)
+if(NOT Ceres_FOUND)
+    find_package(ceres-solver QUIET)
+    if(NOT ceres-solver_FOUND)
+        message(FATAL_ERROR "Neither Ceres nor ceres-solver found!")
+    endif()
+endif()
 
 catkin_package(
   INCLUDE_DIRS

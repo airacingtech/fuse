@@ -10,7 +10,13 @@ set(build_depends
 find_package(catkin REQUIRED COMPONENTS
   ${build_depends}
 )
-find_package(Ceres REQUIRED)
+find_package(Ceres QUIET)
+if(NOT Ceres_FOUND)
+    find_package(ceres-solver QUIET)
+    if(NOT ceres-solver_FOUND)
+        message(FATAL_ERROR "Neither Ceres nor ceres-solver found!")
+    endif()
+endif()
 
 catkin_package(
   INCLUDE_DIRS
