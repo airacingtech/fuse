@@ -2,6 +2,17 @@
 Changelog for package fuse_variables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Porting StampedVariableSynchronizer changes to ROS 2 (`#414 <https://github.com/locusrobotics/fuse/issues/414>`_)
+  * Porting effort to ROS 2
+  * Porting this functionality to ROS 2
+  * Responding to comments
+* [RST-12952] Modified the loadDeviceId() function to accept optional parameters (`#409 <https://github.com/locusrobotics/fuse/issues/409>`_)
+  * Modified the loadDeviceId() function to accept optional parameter names for the device UUID and device name
+  * Use the logging interface from the node
+* Contributors: David Murdoch, Stephen Williams
+
 1.2.3 (2025-05-24)
 ------------------
 
