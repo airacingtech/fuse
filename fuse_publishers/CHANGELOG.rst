@@ -2,6 +2,9 @@
 Changelog for package fuse_publishers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.2.4 (2025-07-28)
 ------------------
 * Update headers for tf2_ros (`#417 <https://github.com/locusrobotics/fuse/issues/417>`_)
