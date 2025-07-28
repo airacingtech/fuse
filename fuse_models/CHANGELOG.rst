@@ -2,8 +2,8 @@
 Changelog for package fuse_models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.2.4 (2025-07-28)
+------------------
 * Fix wrong `benchmark` target (`#418 <https://github.com/locusrobotics/fuse/issues/418>`_)
   See analogous `CMakeLists.txt` for `fuse_constraints/benchmark` and `fuse_graph/benchmark`
 * Update headers for tf2_ros (`#417 <https://github.com/locusrobotics/fuse/issues/417>`_)

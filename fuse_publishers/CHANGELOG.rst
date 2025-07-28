@@ -2,8 +2,8 @@
 Changelog for package fuse_publishers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.2.4 (2025-07-28)
+------------------
 * Update headers for tf2_ros (`#417 <https://github.com/locusrobotics/fuse/issues/417>`_)
 * Porting StampedVariableSynchronizer changes to ROS 2 (`#414 <https://github.com/locusrobotics/fuse/issues/414>`_)
   * Porting effort to ROS 2
