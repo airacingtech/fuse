@@ -2,6 +2,17 @@
 Changelog for package fuse_publishers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Remove references to deprecated tf2 and tf2_ros headers (`#416 <https://github.com/locusrobotics/fuse/issues/416>`_)
+  * Removed deprecations warnings (`#406 <https://github.com/locusrobotics/fuse/issues/406>`_)
+  * Fix linter errors related to header ordering (`#407 <https://github.com/locusrobotics/fuse/issues/407>`_)
+  * Update headers for tf2_ros (`#417 <https://github.com/locusrobotics/fuse/issues/417>`_)
+  ---------
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+  Co-authored-by: Gary Servin <gservin@locusrobotics.com>
+* Contributors: Stephen Williams
+
 1.1.1 (2024-05-02)
 ------------------
 
