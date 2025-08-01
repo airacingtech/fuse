@@ -213,8 +213,9 @@ public:
    * the generator to create the UUID for a specific variable instance.
    *
    * @param[in] uuid The unique ID number for this variable
+   * @param[in] hold_constant Whether or not to mark variable as constant during optimization
    */
-  explicit Variable(const UUID& uuid);
+  explicit Variable(const UUID& uuid, const bool hold_constant = false);
 
   /**
    * @brief Destructor
@@ -383,11 +384,20 @@ public:
   }
 
   /**
-   * @brief Specifies if the value of the variable should not be changed during optimization
+   * @brief Retrieve whether or not the variable should be held constant during optimization
    */
   virtual bool holdConstant() const
   {
-    return false;
+    return hold_constant_;
+  }
+  /**
+   * @brief Set whether or not to consider variable as constant during optimization
+   *
+   * @param[in] hold_constant If true, variable will not change during optimization, false otherwise
+   */
+  virtual void setHoldConstant(const bool hold_constant)
+  {
+    hold_constant_ = hold_constant;
   }
 
   /**
@@ -440,7 +450,7 @@ public:
 
 private:
   fuse_core::UUID uuid_;  //!< The unique ID number for this variable
-
+  bool hold_constant_ { false };  //!< Flag whether a variable should not be changed during optimization
   // Allow Boost Serialization access to private methods
   friend class boost::serialization::access;
 

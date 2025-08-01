@@ -39,8 +39,9 @@
 namespace fuse_core
 {
 
-Variable::Variable(const UUID& uuid) :
-  uuid_(uuid)
+Variable::Variable(const UUID& uuid, const bool hold_constant) :
+  uuid_(uuid),
+  hold_constant_(hold_constant)
 {
 }
 
