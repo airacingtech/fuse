@@ -34,6 +34,17 @@ find_package(tf2_ros REQUIRED)
 find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
 
+message(STATUS "--- CMake Variables (after find_package) ---")
+get_cmake_property(_variableNames VARIABLES)
+list(SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    STRING(REGEX MATCH "INCLUDE_DIRS" item ${_variableName})
+    IF(item)
+        message(STATUS "${_variableName}=${${_variableName}}")
+    ENDIF(item)
+endforeach()
+message(STATUS "--------------------------------------------")
+
 ###########
 ## Build ##
 ###########
