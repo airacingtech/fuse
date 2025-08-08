@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 #include <Eigen/Dense>
+#include <tf2/convert.h>
+#include <tf2/LinearMath/Quaternion.h>
 
 #include <exception>
 #include <stdexcept>
@@ -55,8 +57,6 @@
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 #include <pluginlib/class_list_macros.hpp>
 #include <std_srvs/srv/empty.hpp>
-#include <tf2/convert.hpp>
-#include <tf2/LinearMath/Quaternion.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 // Register this motion model with ROS as a plugin.

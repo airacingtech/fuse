@@ -35,6 +35,7 @@
 #ifndef FUSE_VIZ__POSE_2D_STAMPED_VISUAL_HPP_
 #define FUSE_VIZ__POSE_2D_STAMPED_VISUAL_HPP_
 
+#include <tf2/LinearMath/Transform.h>
 #include <Ogre.h>
 
 #include <memory>
@@ -43,7 +44,6 @@
 #include <rviz_rendering/objects/movable_text.hpp>
 #include <rviz_rendering/objects/object.hpp>
 #include <rviz_rendering/objects/shape.hpp>
-#include <tf2/LinearMath/Transform.hpp>
 
 
 namespace Ogre

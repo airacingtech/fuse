@@ -31,6 +31,8 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
+#include <tf2/utils.h>
+
 #include <algorithm>
 #include <utility>
 #include <vector>
@@ -48,7 +50,6 @@
 #include <nav_msgs/msg/path.hpp>
 #include <pluginlib/class_list_macros.hpp>
 #include <rclcpp/rclcpp.hpp>
-#include <tf2/utils.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 // Register this publisher with ROS as a plugin.
