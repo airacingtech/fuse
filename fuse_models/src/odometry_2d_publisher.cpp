@@ -31,9 +31,6 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-#include <tf2_ros/buffer.hpp>
-#include <tf2_ros/transform_listener.hpp>
-
 #include <algorithm>
 #include <chrono>
 #include <memory>
@@ -53,6 +50,8 @@
 #include <pluginlib/class_list_macros.hpp>
 #include <tf2_2d/tf2_2d.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <tf2_ros/buffer.hpp>
+#include <tf2_ros/transform_listener.hpp>
 
 // Register this publisher with ROS as a plugin.
 PLUGINLIB_EXPORT_CLASS(fuse_models::Odometry2DPublisher, fuse_core::Publisher)
