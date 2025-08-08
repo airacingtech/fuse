@@ -2,6 +2,13 @@
 Changelog for package fuse_models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Revert "Remove references to deprecated tf2 and tf2_ros headers (`#416 <https://github.com/locusrobotics/fuse/issues/416>`_)"
+  An updated tf2_ros package is not available yet, resulting in build failures with this commit.
+  This reverts commit 9fcd6ca1a259cc1781326942c8007e19b25b4694.
+* Contributors: Stephen Williams
+
 1.1.2 (2025-07-28)
 ------------------
 * Remove references to deprecated tf2 and tf2_ros headers (`#416 <https://github.com/locusrobotics/fuse/issues/416>`_)
