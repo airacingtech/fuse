@@ -34,10 +34,6 @@
 #ifndef FUSE_MODELS__ODOMETRY_2D_PUBLISHER_HPP_
 #define FUSE_MODELS__ODOMETRY_2D_PUBLISHER_HPP_
 
-#include <tf2_ros/buffer.hpp>
-#include <tf2_ros/transform_broadcaster.hpp>
-#include <tf2_ros/transform_listener.hpp>
-
 #include <memory>
 #include <mutex>
 #include <string>
@@ -55,6 +51,9 @@
 #include <geometry_msgs/msg/accel_with_covariance_stamped.hpp>
 #include <nav_msgs/msg/odometry.hpp>
 #include <rclcpp/rclcpp.hpp>
+#include <tf2_ros/buffer.hpp>
+#include <tf2_ros/transform_broadcaster.hpp>
+#include <tf2_ros/transform_listener.hpp>
 
 
 namespace fuse_models

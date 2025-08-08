@@ -33,7 +33,6 @@
  */
 
 #include <gtest/gtest.h>
-#include <tf2_ros/static_transform_broadcaster.hpp>
 
 #include <vector>
 
@@ -52,8 +51,8 @@
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 #include <rclcpp/rclcpp.hpp>
-
 #include <tf2_msgs/msg/tf_message.hpp>
+#include <tf2_ros/static_transform_broadcaster.hpp>
 
 
 /**

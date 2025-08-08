@@ -34,9 +34,6 @@
 #ifndef FUSE_MODELS__POSE_2D_HPP_
 #define FUSE_MODELS__POSE_2D_HPP_
 
-#include <tf2_ros/buffer.hpp>
-#include <tf2_ros/transform_listener.hpp>
-
 #include <memory>
 #include <string>
 
@@ -48,6 +45,8 @@
 
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 #include <rclcpp/rclcpp.hpp>
+#include <tf2_ros/buffer.hpp>
+#include <tf2_ros/transform_listener.hpp>
 
 
 namespace fuse_models
