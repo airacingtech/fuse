@@ -2,8 +2,8 @@
 Changelog for package fuse_models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.4 (2025-08-29)
+------------------
 * Fix tf2_ros header order
 * Remove references to deprecated tf2 and tf2_ros headers (`#416 <https://github.com/locusrobotics/fuse/issues/416>`_)
   * Removed deprecations warnings (`#406 <https://github.com/locusrobotics/fuse/issues/406>`_)
