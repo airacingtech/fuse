@@ -43,8 +43,8 @@ Changelog for package fuse_optimizers
 * [RST-3451] Cleaned up condition variable usage
 * Contributors: Enrique Fernandez Perdomo, Gary Servin, Stephen Williams, Tom Moore
 
-Forthcoming
------------
+0.12.1 (2025-08-29)
+-------------------
 * add user configurable diag mapping support of termination types. (#410) (#411)
   * add user configurable diag mapping support of termination types.
   * missing return.
