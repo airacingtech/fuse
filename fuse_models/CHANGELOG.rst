@@ -2,6 +2,11 @@
 Changelog for package fuse_models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix tf2_ros header order
+* Contributors: Stephen Williams
+
 1.3.0 (2025-07-28)
 ------------------
 
