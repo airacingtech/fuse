@@ -501,7 +501,8 @@ void Optimizer::setDiagnostics(diagnostic_updater::DiagnosticStatusWrapper & sta
 
   status.summary(diagnostic_msgs::msg::DiagnosticStatus::OK, "Optimizer exists");
 
-  auto print_key = [](const std::string & result, const auto & entry) {
+  auto print_key = [](const std::string & result, const auto & entry)
+    {
       return result + entry.first + ' ';
     };
 
