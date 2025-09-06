@@ -2,6 +2,7 @@
  * Software License Agreement (BSD License)
  *
  *  Copyright (c) 2018, Locus Robotics
+ *  Copyright (c) 2023, Giacomo Franchini
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -41,6 +42,7 @@
 #include <vector>
 
 #include <fuse_constraints/absolute_orientation_3d_stamped_euler_constraint.hpp>
+#include <fuse_core/ceres_macros.hpp>
 #include <fuse_core/eigen.hpp>
 #include <fuse_core/eigen_gtest.hpp>
 #include <fuse_core/uuid.hpp>
@@ -130,7 +132,11 @@ TEST(AbsoluteOrientation3DStampedEulerConstraint, OptimizationFull)
   problem.AddParameterBlock(
     orientation_variable->data(),
     orientation_variable->size(),
+#if !CERES_SUPPORTS_MANIFOLDS
     orientation_variable->localParameterization());
+#else
+    orientation_variable->manifold());
+#endif
 
   std::vector<double *> parameter_blocks;
   parameter_blocks.push_back(orientation_variable->data());
@@ -145,7 +151,8 @@ TEST(AbsoluteOrientation3DStampedEulerConstraint, OptimizationFull)
   ceres::Solve(options, &problem, &summary);
 
   // Check
-  Eigen::Quaterniond expected = Eigen::AngleAxisd(0.5, Eigen::Vector3d::UnitZ()) *
+  Eigen::Quaterniond expected =
+    Eigen::AngleAxisd(0.5, Eigen::Vector3d::UnitZ()) *
     Eigen::AngleAxisd(1.5, Eigen::Vector3d::UnitY()) *
     Eigen::AngleAxisd(1.0, Eigen::Vector3d::UnitX());
   EXPECT_NEAR(expected.w(), orientation_variable->w(), 5.0e-3);
@@ -201,7 +208,11 @@ TEST(AbsoluteOrientation3DStampedEulerConstraint, OptimizationPartial)
   problem.AddParameterBlock(
     orientation_variable->data(),
     orientation_variable->size(),
+#if !CERES_SUPPORTS_MANIFOLDS
     orientation_variable->localParameterization());
+#else
+    orientation_variable->manifold());
+#endif
 
   std::vector<double *> parameter_blocks;
   parameter_blocks.push_back(orientation_variable->data());
@@ -220,7 +231,8 @@ TEST(AbsoluteOrientation3DStampedEulerConstraint, OptimizationPartial)
   ceres::Solve(options, &problem, &summary);
 
   // Check
-  Eigen::Quaterniond expected = Eigen::AngleAxisd(0.5, Eigen::Vector3d::UnitZ()) *
+  Eigen::Quaterniond expected =
+    Eigen::AngleAxisd(0.5, Eigen::Vector3d::UnitZ()) *
     Eigen::AngleAxisd(1.5, Eigen::Vector3d::UnitY()) *
     Eigen::AngleAxisd(1.0, Eigen::Vector3d::UnitX());
   EXPECT_NEAR(expected.w(), orientation_variable->w(), 5.0e-3);
