@@ -42,7 +42,6 @@
 #include <boost/serialization/export.hpp>
 #include <fuse_core/constraint.hpp>
 #include <fuse_core/fuse_macros.hpp>
-#include <fuse_core/manifold.hpp>
 #include <fuse_core/serialization.hpp>
 #include <fuse_core/uuid.hpp>
 

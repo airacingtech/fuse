@@ -38,7 +38,6 @@
 #include <boost/serialization/export.hpp>
 #include <fuse_constraints/marginal_constraint.hpp>
 #include <fuse_constraints/marginal_cost_function.hpp>
-#include <fuse_core/ceres_macros.hpp>
 #include <fuse_core/constraint.hpp>
 #include <pluginlib/class_list_macros.hpp>
 
@@ -69,11 +68,7 @@ void MarginalConstraint::print(std::ostream & stream) const
 
 ceres::CostFunction * MarginalConstraint::costFunction() const
 {
-#if !CERES_SUPPORTS_MANIFOLDS
   return new MarginalCostFunction(A_, b_, x_bar_, local_parameterizations_);
-#else
-  return new MarginalCostFunction(A_, b_, x_bar_, manifolds_);
-#endif
 }
 
 }  // namespace fuse_constraints

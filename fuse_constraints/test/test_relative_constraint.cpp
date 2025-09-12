@@ -41,7 +41,6 @@
 
 #include <fuse_constraints/absolute_constraint.hpp>
 #include <fuse_constraints/relative_constraint.hpp>
-#include <fuse_core/ceres_macros.hpp>
 #include <fuse_core/eigen.hpp>
 #include <fuse_core/eigen_gtest.hpp>
 #include <fuse_core/serialization.hpp>
@@ -62,9 +61,9 @@ TEST(RelativeConstraint, Constructor)
       fuse_core::uuid::generate("robby"));
     fuse_variables::AccelerationAngular2DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("robby"));
-    fuse_core::VectorXd delta(1);
+    fuse_core::Vector1d delta;
     delta << 3.0;
-    fuse_core::MatrixXd cov(1, 1);
+    fuse_core::Matrix1d cov;
     cov << 1.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativeAccelerationAngular2DStampedConstraint constraint(
@@ -76,9 +75,9 @@ TEST(RelativeConstraint, Constructor)
       fuse_core::uuid::generate("bender"));
     fuse_variables::AccelerationLinear2DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("bender"));
-    fuse_core::VectorXd delta(2);
+    fuse_core::Vector2d delta;
     delta << 1.0, 2.0;
-    fuse_core::MatrixXd cov(2, 2);
+    fuse_core::Matrix2d cov;
     cov << 1.0, 0.1, 0.1, 2.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativeAccelerationLinear2DStampedConstraint constraint(
@@ -90,9 +89,9 @@ TEST(RelativeConstraint, Constructor)
       fuse_core::uuid::generate("johnny5"));
     fuse_variables::Orientation2DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("johnny5"));
-    fuse_core::VectorXd delta(1);
+    fuse_core::Vector1d delta;
     delta << 3.0;
-    fuse_core::MatrixXd cov(1, 1);
+    fuse_core::Matrix1d cov;
     cov << 1.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativeOrientation2DStampedConstraint constraint(
@@ -104,9 +103,9 @@ TEST(RelativeConstraint, Constructor)
         "rosie"));
     fuse_variables::Position2DStamped x2(rclcpp::Time(1235, 5678), fuse_core::uuid::generate(
         "rosie"));
-    fuse_core::VectorXd delta(2);
+    fuse_core::Vector2d delta;
     delta << 1.0, 2.0;
-    fuse_core::MatrixXd cov(2, 2);
+    fuse_core::Matrix2d cov;
     cov << 1.0, 0.1, 0.1, 2.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativePosition2DStampedConstraint constraint("test", x1, x2, delta, cov));
@@ -116,9 +115,9 @@ TEST(RelativeConstraint, Constructor)
         "clank"));
     fuse_variables::Position3DStamped x2(rclcpp::Time(1235, 5678), fuse_core::uuid::generate(
         "clank"));
-    fuse_core::VectorXd delta(3);
+    fuse_core::Vector3d delta;
     delta << 1.0, 2.0, 3.0;
-    fuse_core::MatrixXd cov(3, 3);
+    fuse_core::Matrix3d cov;
     cov << 1.0, 0.1, 0.2, 0.3, 2.0, 0.3, 0.2, 0.3, 3.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativePosition3DStampedConstraint constraint("test", x1, x2, delta, cov));
@@ -128,9 +127,9 @@ TEST(RelativeConstraint, Constructor)
       fuse_core::uuid::generate("gort"));
     fuse_variables::VelocityAngular2DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("gort"));
-    fuse_core::VectorXd delta(1);
+    fuse_core::Vector1d delta;
     delta << 3.0;
-    fuse_core::MatrixXd cov(1, 1);
+    fuse_core::Matrix1d cov;
     cov << 1.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativeVelocityAngular2DStampedConstraint constraint(
@@ -142,9 +141,9 @@ TEST(RelativeConstraint, Constructor)
       fuse_core::uuid::generate("bishop"));
     fuse_variables::VelocityLinear2DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("bishop"));
-    fuse_core::VectorXd delta(2);
+    fuse_core::Vector2d delta;
     delta << 1.0, 2.0;
-    fuse_core::MatrixXd cov(2, 2);
+    fuse_core::Matrix2d cov;
     cov << 1.0, 0.1, 0.1, 2.0;
     EXPECT_NO_THROW(
       fuse_constraints::RelativeVelocityLinear2DStampedConstraint constraint(
@@ -157,9 +156,9 @@ TEST(RelativeConstraint, PartialMeasurement)
 {
   fuse_variables::Position3DStamped x1(rclcpp::Time(1234, 5678), fuse_core::uuid::generate("vici"));
   fuse_variables::Position3DStamped x2(rclcpp::Time(1235, 5678), fuse_core::uuid::generate("vici"));
-  fuse_core::VectorXd delta(2);
+  fuse_core::Vector2d delta;
   delta << 3.0, 1.0;
-  fuse_core::MatrixXd cov(2, 2);
+  fuse_core::Matrix2d cov;
   cov << 3.0, 0.2, 0.2, 1.0;
   auto indices = std::vector<size_t>{2, 0};
   EXPECT_NO_THROW(
@@ -177,9 +176,9 @@ TEST(RelativeConstraint, Covariance)
       fuse_core::uuid::generate("chappie"));
     fuse_variables::AccelerationLinear2DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("chappie"));
-    fuse_core::VectorXd delta(2);
+    fuse_core::Vector2d delta;
     delta << 1.0, 2.0;
-    fuse_core::MatrixXd cov(2, 2);
+    fuse_core::Matrix2d cov;
     cov << 1.0, 0.1, 0.1, 2.0;
     fuse_constraints::RelativeAccelerationLinear2DStampedConstraint constraint("test", x1, x2,
       delta, cov);
@@ -198,9 +197,9 @@ TEST(RelativeConstraint, Covariance)
       fuse_core::uuid::generate("astroboy"));
     fuse_variables::Position3DStamped x2(rclcpp::Time(1235, 5678),
       fuse_core::uuid::generate("astroboy"));
-    fuse_core::VectorXd delta(2);
+    fuse_core::Vector2d delta;
     delta << 3.0, 1.0;
-    fuse_core::MatrixXd cov(2, 2);
+    fuse_core::Matrix2d cov;
     cov << 3.0, 0.2, 0.2, 1.0;
     auto indices = std::vector<size_t>{2, 0};
     fuse_constraints::RelativePosition3DStampedConstraint constraint("test", x1, x2, delta, cov,
@@ -240,9 +239,9 @@ TEST(RelativeConstraint, Optimization)
     x2->x() = -4.2;
     x2->y() = 1.9;
     // Create an absolute constraint
-    fuse_core::VectorXd mean(2);
+    fuse_core::Vector2d mean;
     mean << 1.0, 2.0;
-    fuse_core::MatrixXd cov1(2, 2);
+    fuse_core::Matrix2d cov1;
     cov1 << 1.0, 0.1, 0.1, 2.0;
     auto prior = fuse_constraints::AbsoluteAccelerationLinear2DStampedConstraint::make_shared(
       "test",
@@ -250,9 +249,9 @@ TEST(RelativeConstraint, Optimization)
       mean,
       cov1);
     // Create an relative constraint
-    fuse_core::VectorXd delta(2);
+    fuse_core::Vector2d delta;
     delta << 0.1, 0.2;
-    fuse_core::MatrixXd cov2(2, 2);
+    fuse_core::Matrix2d cov2;
     cov2 << 1.0, 0.0, 0.0, 2.0;
     auto relative = fuse_constraints::RelativeAccelerationLinear2DStampedConstraint::make_shared(
       "test",
@@ -267,19 +266,11 @@ TEST(RelativeConstraint, Optimization)
     problem.AddParameterBlock(
       x1->data(),
       x1->size(),
-#if !CERES_SUPPORTS_MANIFOLDS
       x1->localParameterization());
-#else
-      x1->manifold());
-#endif
     problem.AddParameterBlock(
       x2->data(),
       x2->size(),
-#if !CERES_SUPPORTS_MANIFOLDS
       x2->localParameterization());
-#else
-      x2->manifold());
-#endif
     std::vector<double *> prior_parameter_blocks;
     prior_parameter_blocks.push_back(x1->data());
     problem.AddResidualBlock(
@@ -344,9 +335,9 @@ TEST(RelativeConstraint, Optimization)
     x2->y() = 1.9;
     x2->z() = 19.2;
     // Create an absolute constraint
-    fuse_core::VectorXd mean1(3);
+    fuse_core::Vector3d mean1;
     mean1 << 1.0, 2.0, 3.0;
-    fuse_core::MatrixXd cov1(3, 3);
+    fuse_core::Matrix3d cov1;
     cov1 << 1.0, 0.1, 0.2, 0.1, 2.0, 0.3, 0.2, 0.3, 3.0;
     auto c1 = fuse_constraints::AbsolutePosition3DStampedConstraint::make_shared(
       "test",
@@ -354,9 +345,9 @@ TEST(RelativeConstraint, Optimization)
       mean1,
       cov1);
     // Create an relative constraint
-    fuse_core::VectorXd delta2(3);
+    fuse_core::Vector3d delta2;
     delta2 << 0.1, 0.2, 0.3;
-    fuse_core::MatrixXd cov2(3, 3);
+    fuse_core::Matrix3d cov2;
     cov2 << 1.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 3.0;
     auto c2 = fuse_constraints::RelativePosition3DStampedConstraint::make_shared(
       "test",
@@ -365,9 +356,9 @@ TEST(RelativeConstraint, Optimization)
       delta2,
       cov2);
     // Create an partial relative constraint
-    fuse_core::VectorXd delta3(2);
+    fuse_core::Vector2d delta3;
     delta3 << 0.1, 0.2;
-    fuse_core::MatrixXd cov3(2, 2);
+    fuse_core::Matrix2d cov3;
     cov3 << 1.0, 0.0, 0.0, 3.0;
     auto indices3 = std::vector<size_t>{2, 0};
     auto c3 = fuse_constraints::RelativePosition3DStampedConstraint::make_shared(
@@ -384,19 +375,11 @@ TEST(RelativeConstraint, Optimization)
     problem.AddParameterBlock(
       x1->data(),
       x1->size(),
-#if !CERES_SUPPORTS_MANIFOLDS
       x1->localParameterization());
-#else
-      x1->manifold());
-#endif
     problem.AddParameterBlock(
       x2->data(),
       x2->size(),
-#if !CERES_SUPPORTS_MANIFOLDS
       x2->localParameterization());
-#else
-      x2->manifold());
-#endif
     std::vector<double *> c1_parameter_blocks;
     c1_parameter_blocks.push_back(x1->data());
     problem.AddResidualBlock(
@@ -466,9 +449,9 @@ TEST(RelativeConstraint, RelativeOrientation2DOptimization)
     fuse_core::uuid::generate("t800"));
   x2->yaw() = -2.2;
   // Create an absolute constraint
-  fuse_core::VectorXd mean(1);
+  fuse_core::Vector1d mean;
   mean << 1.0;
-  fuse_core::MatrixXd cov1(1, 1);
+  fuse_core::Matrix1d cov1;
   cov1 << 2.0;
   auto prior = fuse_constraints::AbsoluteOrientation2DStampedConstraint::make_shared(
     "test",
@@ -476,9 +459,9 @@ TEST(RelativeConstraint, RelativeOrientation2DOptimization)
     mean,
     cov1);
   // Create an relative constraint
-  fuse_core::VectorXd delta(1);
+  fuse_core::Vector1d delta;
   delta << 0.1;
-  fuse_core::MatrixXd cov2(1, 1);
+  fuse_core::Matrix1d cov2;
   cov2 << 1.0;
   auto relative = fuse_constraints::RelativeOrientation2DStampedConstraint::make_shared(
     "test",
@@ -493,19 +476,11 @@ TEST(RelativeConstraint, RelativeOrientation2DOptimization)
   problem.AddParameterBlock(
     x1->data(),
     x1->size(),
-#if !CERES_SUPPORTS_MANIFOLDS
     x1->localParameterization());
-#else
-    x1->manifold());
-#endif
   problem.AddParameterBlock(
     x2->data(),
     x2->size(),
-#if !CERES_SUPPORTS_MANIFOLDS
     x2->localParameterization());
-#else
-    x2->manifold());
-#endif
   std::vector<double *> prior_parameter_blocks;
   prior_parameter_blocks.push_back(x1->data());
   problem.AddResidualBlock(
@@ -556,9 +531,9 @@ TEST(RelativeConstraint, Serialization)
     fuse_core::uuid::generate("robby"));
   fuse_variables::AccelerationAngular2DStamped x2(rclcpp::Time(1235, 5678),
     fuse_core::uuid::generate("robby"));
-  fuse_core::VectorXd delta(1);
+  fuse_core::Vector1d delta;
   delta << 3.0;
-  fuse_core::MatrixXd cov(1, 1);
+  fuse_core::Matrix1d cov;
   cov << 1.0;
   fuse_constraints::RelativeAccelerationAngular2DStampedConstraint expected("test", x1, x2, delta,
     cov);

@@ -109,7 +109,7 @@ template<typename T>
 class CallbackWrapper : public CallbackWrapperBase
 {
 public:
-  using CallbackFunction = std::function<T (void)>;
+  using CallbackFunction = std::function<T(void)>;
 
   /**
    * @brief Constructor
@@ -166,7 +166,8 @@ public:
   /**
    * @brief tell the CallbackGroup that this waitable is ready to execute anything
    */
-  bool is_ready(rcl_wait_set_t * wait_set_raw) override;
+  bool is_ready(rcl_wait_set_t * wait_set) override;
+
 
   /**
    * @brief add_to_wait_set is called by rclcpp during NodeWaitables::add_waitable() and
@@ -174,7 +175,7 @@ public:
     waitable_ptr = std::make_shared<CallbackWrapper>();
     node->get_node_waitables_interface()->add_waitable(waitable_ptr, (rclcpp::CallbackGroup::SharedPtr) nullptr);
    */
-  void add_to_wait_set(rcl_wait_set_t * wait_set_raw) override;
+  void add_to_wait_set(rcl_wait_set_t * wait_set) override;
 
   std::shared_ptr<void> take_data() override;
 
@@ -185,13 +186,6 @@ public:
   void addCallback(std::shared_ptr<CallbackWrapperBase> && callback);
 
   void removeAllCallbacks();
-
-  void set_on_ready_callback(std::function<void(size_t, int)>) override {}
-  void clear_on_ready_callback() override {}
-  std::shared_ptr<void> take_data_by_entity_id(size_t) override
-  {
-    return nullptr;
-  }
 
 private:
   rcl_guard_condition_t gc_;  //!< guard condition to drive the waitable

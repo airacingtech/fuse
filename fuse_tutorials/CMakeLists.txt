@@ -44,12 +44,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${sensor_msgs_TARGETS}
 )
 
-# tutorial_sim executables
+# tutorial_sim executable
 add_executable(range_sensor_simulator src/range_sensor_simulator.cpp)
 target_link_libraries(range_sensor_simulator ${PROJECT_NAME})
-
-add_executable(three_dimensional_simulator src/three_dimensional_simulator.cpp)
-target_link_libraries(three_dimensional_simulator ${PROJECT_NAME})
 
 #############
 ## Testing ##
@@ -78,7 +75,6 @@ install(TARGETS
   TARGETS range_sensor_simulator
   DESTINATION lib/${PROJECT_NAME}
 )
-install(TARGETS three_dimensional_simulator DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config data
   DESTINATION share/${PROJECT_NAME}
