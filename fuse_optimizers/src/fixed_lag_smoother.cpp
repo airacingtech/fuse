@@ -189,7 +189,8 @@ void FixedLagSmoother::optimizationLoop()
       return
         this->optimization_request_ ||
         !this->optimization_running_ ||
-        !interfaces_.get_node_base_interface()->get_context()->is_valid();
+        !interfaces_.get_node_base_interface()->get_context()->is_valid()
+      ;
     };
   // Optimize constraints until told to exit
   while (interfaces_.get_node_base_interface()->get_context()->is_valid() &&
@@ -399,6 +400,7 @@ void FixedLagSmoother::processQueue(
       return;
     }
   }
+
   // Use the most recent transaction time as the current time
   const auto current_time = pending_transactions_.front().stamp();
 
@@ -549,8 +551,8 @@ void FixedLagSmoother::transactionCallback(
             [&sensor_name, max_time,
             & min_time = start_time](const auto & transaction) {  // NOLINT(whitespace/braces)
               return transaction.sensor_name != sensor_name &&
-                     (transaction.minStamp() < min_time || transaction.maxStamp() <= max_time);
-            }),  // NOLINT(whitespace/braces)
+              (transaction.minStamp() < min_time || transaction.maxStamp() <= max_time);
+            }),                 // NOLINT(whitespace/braces)
           pending_transactions_.end());
       } else {
         // And purge out old transactions to limit the pending size while waiting for an ignition

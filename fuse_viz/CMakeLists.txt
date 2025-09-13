@@ -52,10 +52,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   fuse_constraints::fuse_constraints
   fuse_core::fuse_core
   fuse_variables::fuse_variables
-  ${geometry_msgs_TARGETS}
   rviz_common::rviz_common
   rviz_rendering::rviz_rendering
-  tf2_geometry_msgs::tf2_geometry_msgs
+  tf2::tf2
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

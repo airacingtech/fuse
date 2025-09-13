@@ -35,7 +35,6 @@
 
 #include <boost/serialization/export.hpp>
 #include <fuse_core/local_parameterization.hpp>
-#include <fuse_core/manifold.hpp>
 #include <fuse_core/uuid.hpp>
 #include <fuse_variables/fixed_size_variable.hpp>
 #include <fuse_variables/orientation_2d_stamped.hpp>
@@ -70,18 +69,8 @@ fuse_core::LocalParameterization * Orientation2DStamped::localParameterization()
   return new Orientation2DLocalParameterization();
 }
 
-#if CERES_SUPPORTS_MANIFOLDS
-fuse_core::Manifold * Orientation2DStamped::manifold() const
-{
-  return new Orientation2DManifold();
-}
-#endif
-
 }  // namespace fuse_variables
 
-#if CERES_SUPPORTS_MANIFOLDS
-BOOST_CLASS_EXPORT_IMPLEMENT(fuse_variables::Orientation2DManifold);
-#endif
 BOOST_CLASS_EXPORT_IMPLEMENT(fuse_variables::Orientation2DLocalParameterization);
 BOOST_CLASS_EXPORT_IMPLEMENT(fuse_variables::Orientation2DStamped);
 PLUGINLIB_EXPORT_CLASS(fuse_variables::Orientation2DStamped, fuse_core::Variable);
