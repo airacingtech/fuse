@@ -22,6 +22,7 @@ find_package(fuse_variables REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(pluginlib REQUIRED)
+find_package(race_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -41,11 +42,14 @@ find_package(Eigen3 REQUIRED)
 ## Declare a C++ library
 add_library(${PROJECT_NAME}
   src/acceleration_2d.cpp
+  src/bicycle_2d.cpp
+  src/bicycle_2d_state_kinematic_constraint.cpp
   src/graph_ignition.cpp
   src/imu_2d.cpp
   src/odometry_2d.cpp
   src/odometry_2d_publisher.cpp
   src/pose_2d.cpp
+  src/steering_angle_2d.cpp
   src/transaction.cpp
   src/twist_2d.cpp
   src/unicycle_2d.cpp
@@ -67,6 +71,7 @@ target_link_libraries(${PROJECT_NAME}
   ${geometry_msgs_TARGETS}
   ${nav_msgs_TARGETS}
   pluginlib::pluginlib
+  ${race_msgs_TARGETS}
   rclcpp_components::component
   rclcpp::rclcpp
   ${sensor_msgs_TARGETS}
@@ -124,6 +129,7 @@ ament_export_dependencies(
   geometry_msgs
   nav_msgs
   pluginlib
+  race_msgs
   rclcpp_components
   rclcpp
   sensor_msgs

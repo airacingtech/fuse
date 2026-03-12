@@ -556,8 +556,8 @@ void FixedLagSmoother::transactionCallback(
       } else {
         // And purge out old transactions to limit the pending size while waiting for an ignition
         // sensor
-        auto purge_time = rclcpp::Time(0, 0, RCL_ROS_TIME);  // NOTE(CH3): Uninitialized
         auto last_pending_time = pending_transactions_.front().stamp();
+        auto purge_time = rclcpp::Time(0, 0, last_pending_time.get_clock_type());  // NOTE(CH3): Uninitialized
 
         // rclcpp::Time doesn't allow negatives
         if (rclcpp::Time(

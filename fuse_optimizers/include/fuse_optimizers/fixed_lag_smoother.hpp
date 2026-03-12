@@ -184,7 +184,7 @@ protected:
   // Guarded by optimization_mutex_
   std::mutex optimization_mutex_;  //!< Mutex held while the graph is begin optimized
   // fuse_core::Graph* graph_ member from the base class
-  rclcpp::Time lag_expiration_;  //!< The oldest stamp that is inside the fixed-lag smoother window
+  rclcpp::Time lag_expiration_{0, 0, RCL_ROS_TIME};  //!< The oldest stamp that is inside the fixed-lag smoother window
   fuse_core::Transaction marginal_transaction_;  //!< The marginals to add during the next
                                                  //!< optimization cycle
   VariableStampIndex timestamp_tracking_;  //!< Object that tracks the timestamp associated with
@@ -194,7 +194,7 @@ protected:
 
   // Guarded by optimization_requested_mutex_
   std::mutex optimization_requested_mutex_;  //!< Required condition variable mutex
-  rclcpp::Time optimization_deadline_;  //!< The deadline for the optimization to complete. Triggers
+  rclcpp::Time optimization_deadline_{0, 0, RCL_ROS_TIME};  //!< The deadline for the optimization to complete. Triggers
                                         //!< a warning if exceeded.
   bool optimization_request_;  //!< Flag to trigger a new optimization
   std::condition_variable optimization_requested_;  //!< Condition variable used by the optimization
