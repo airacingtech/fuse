@@ -116,10 +116,13 @@ void Odometry2D::onStart()
     rclcpp::SubscriptionOptions sub_options;
     sub_options.callback_group = cb_group_;
 
+    rclcpp::QoS qos(params_.queue_size);
+    qos.best_effort();
+
     sub_ = rclcpp::create_subscription<nav_msgs::msg::Odometry>(
       interfaces_,
       params_.topic,
-      params_.queue_size,
+      qos,
       std::bind(
         &OdometryThrottledCallback::callback<
           const nav_msgs::msg::Odometry &>,
