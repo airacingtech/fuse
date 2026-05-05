@@ -2,6 +2,9 @@
 Changelog for package fuse_constraints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.1.4 (2025-08-29)
 ------------------
 
