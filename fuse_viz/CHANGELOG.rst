@@ -2,6 +2,9 @@
 Changelog for package fuse_viz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.5 (2026-05-05)
+------------------
+
 1.1.4 (2025-08-29)
 ------------------
 * Remove references to deprecated tf2 and tf2_ros headers (`#416 <https://github.com/locusrobotics/fuse/issues/416>`_)
