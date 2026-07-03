@@ -184,7 +184,11 @@ protected:
   // Guarded by optimization_mutex_
   std::mutex optimization_mutex_;  //!< Mutex held while the graph is begin optimized
   // fuse_core::Graph* graph_ member from the base class
-  rclcpp::Time lag_expiration_;  //!< The oldest stamp that is inside the fixed-lag smoother window
+  // Must be initialized as ROS time: in the auto-start path (no ignition sensor) the first
+  // transaction reaches the lag-expiration comparison in processQueue() before the first
+  // optimization cycle assigns this, and a default-constructed (system-time) value makes that
+  // comparison throw "can't compare times with different time sources", killing the node.
+  rclcpp::Time lag_expiration_ {0, 0, RCL_ROS_TIME};  //!< The oldest stamp inside the lag window
   fuse_core::Transaction marginal_transaction_;  //!< The marginals to add during the next
                                                  //!< optimization cycle
   VariableStampIndex timestamp_tracking_;  //!< Object that tracks the timestamp associated with

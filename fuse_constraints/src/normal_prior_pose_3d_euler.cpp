@@ -69,10 +69,13 @@ bool NormalPriorPose3DEuler::Evaluate(
   full_residuals(1) = parameters[0][1] - b_(1);
   full_residuals(2) = parameters[0][2] - b_(2);
 
-  // Compute the orientation residual
-  full_residuals(3) = orientation_rpy[0] - b_(3);
-  full_residuals(4) = orientation_rpy[1] - b_(4);
-  full_residuals(5) = orientation_rpy[2] - b_(5);
+  // Compute the orientation residual. Wrap into (-Pi, Pi] so a heading straddling the +-Pi branch
+  // cut yields a ~0 error instead of a spurious ~2*Pi one (which otherwise yanks yaw to the wrong
+  // branch). Matches the motion-model cost function; the analytic Jacobian is unchanged because
+  // wrapping shifts the residual by a constant multiple of 2*Pi.
+  full_residuals(3) = fuse_core::wrapAngle2D(orientation_rpy[0] - b_(3));
+  full_residuals(4) = fuse_core::wrapAngle2D(orientation_rpy[1] - b_(4));
+  full_residuals(5) = fuse_core::wrapAngle2D(orientation_rpy[2] - b_(5));
 
   // Scale the residuals by the square root information matrix to account for
   // the measurement uncertainty.
