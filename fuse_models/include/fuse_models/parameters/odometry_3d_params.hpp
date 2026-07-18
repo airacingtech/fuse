@@ -166,6 +166,16 @@ public:
         fuse_core::joinParameterName(ns, "twist_covariance_offset_diagonal"), 0.0);
     }
 
+    reacquisition_tau_s = fuse_core::getParam(
+      interfaces, fuse_core::joinParameterName(ns, "reacquisition_tau_s"),
+      reacquisition_tau_s);
+    reacquisition_position_softening_mps = fuse_core::getParam(
+      interfaces, fuse_core::joinParameterName(ns, "reacquisition_position_softening_mps"),
+      reacquisition_position_softening_mps);
+    reacquisition_heading_softening_radps = fuse_core::getParam(
+      interfaces, fuse_core::joinParameterName(ns, "reacquisition_heading_softening_radps"),
+      reacquisition_heading_softening_radps);
+
     pose_loss =
       fuse_core::loadLossConfig(interfaces, fuse_core::joinParameterName(ns, "pose_loss"));
     linear_velocity_loss =
@@ -184,6 +194,18 @@ public:
   bool disable_checks {false};
   bool independent {true};
   bool use_twist_covariance {true};
+  //!< Smooth reacquisition after an outage: on the first messages back, the pose covariance is
+  //!< inflated (so the stiff dead-reckoned estimate is not yanked to the fix in one solve) and
+  //!< decayed over reacquisition_tau_s, so the estimate slides back over a few seconds. See
+  //!< DEAD_RECKONING.md section 8. Off unless reacquisition_tau_s > 0.
+  double reacquisition_tau_s {0.0};  //!< Covariance-decay time constant (s); reconverge ~2-3x this. <=0 = off.
+  //!< Initial position-std added per second of outage (m). Deliberately set ABOVE physical drift
+  //!< to exceed the estimator's (overconfident) dead-reckoning covariance - otherwise the smoother
+  //!< still takes a first-solve "bite". Higher = smaller initial step, slower reconvergence.
+  double reacquisition_position_softening_mps {0.0};
+  //!< Initial heading-std added per second of outage (rad); softens the yaw correction so the
+  //!< heading eases back instead of jerking (which would rotate the whole velocity vector).
+  double reacquisition_heading_softening_radps {0.0};
   fuse_core::Matrix6d minimum_pose_relative_covariance;  //!< Minimum pose relative covariance
                                                          //!< matrix
   fuse_core::Matrix6d twist_covariance_offset;    //!< Offset already added to the twist covariance

@@ -31,6 +31,8 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
+#include <algorithm>
+#include <cmath>
 #include <memory>
 #include <utility>
 
@@ -49,6 +51,13 @@ PLUGINLIB_EXPORT_CLASS(fuse_models::Odometry3D, fuse_core::SensorModel)
 
 namespace fuse_models
 {
+
+namespace
+{
+constexpr double kReacquisitionGapThresholdSec = 0.3;  // publish gap that counts as an outage
+constexpr double kReacquisitionMaxStdM = 100.0;        // safety clamp on the initial ramp position std
+constexpr double kReacquisitionMaxOrientStdRad = 0.5;  // safety clamp on the initial ramp yaw std
+}  // namespace
 
 Odometry3D::Odometry3D()
 : fuse_core::AsyncSensorModel(1),
@@ -147,6 +156,48 @@ void Odometry3D::process(const nav_msgs::msg::Odometry & msg)
   twist.header = msg.header;
   twist.header.frame_id = msg.child_frame_id;
   twist.twist = msg.twist;
+
+  // Reacquisition covariance ramp (absolute pose only): after this source drops out
+  // and returns, soften its position AND orientation covariance - scaled by the outage
+  // length and decayed over reacquisition_tau_s - so the estimate slides back to the
+  // fix instead of snapping off the dead-reckoned trajectory in one optimizer step.
+  // Orientation is ramped too: during the outage the heading dead-reckons (gyro drift),
+  // and a hard yaw correction rotates the whole velocity vector - the harshest part of
+  // the snap even when position is already softened.
+  if (!params_.differential && params_.reacquisition_tau_s > 0.0) {
+    const rclcpp::Time stamp(msg.header.stamp);
+    if (last_message_stamp_.nanoseconds() > 0) {
+      const double gap = (stamp - last_message_stamp_).seconds();
+      if (gap > kReacquisitionGapThresholdSec) {
+        const double pos_std = std::min(
+          gap * params_.reacquisition_position_softening_mps, kReacquisitionMaxStdM);
+        const double yaw_std = std::min(
+          gap * params_.reacquisition_heading_softening_radps, kReacquisitionMaxOrientStdRad);
+        reacquisition_initial_variance_ = pos_std * pos_std;
+        reacquisition_initial_orient_variance_ = yaw_std * yaw_std;
+        reacquisition_ramp_start_ = stamp;
+        in_reacquisition_ramp_ =
+          reacquisition_initial_variance_ > 0.0 || reacquisition_initial_orient_variance_ > 0.0;
+      }
+    }
+    last_message_stamp_ = stamp;
+    if (in_reacquisition_ramp_) {
+      const double dt = (stamp - reacquisition_ramp_start_).seconds();
+      const double decay = std::exp(-2.0 * dt / params_.reacquisition_tau_s);
+      const double pos_inflation = reacquisition_initial_variance_ * decay;
+      const double orient_inflation = reacquisition_initial_orient_variance_ * decay;
+      if (pos_inflation < 1e-4 && orient_inflation < 1e-6) {
+        in_reacquisition_ramp_ = false;
+      } else {
+        pose->pose.covariance[0] += pos_inflation;
+        pose->pose.covariance[7] += pos_inflation;
+        pose->pose.covariance[14] += pos_inflation;
+        pose->pose.covariance[21] += orient_inflation;
+        pose->pose.covariance[28] += orient_inflation;
+        pose->pose.covariance[35] += orient_inflation;
+      }
+    }
+  }
 
   const bool validate = !params_.disable_checks;
 

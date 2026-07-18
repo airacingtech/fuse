@@ -171,6 +171,17 @@ protected:
 
   geometry_msgs::msg::PoseWithCovarianceStamped::UniquePtr previous_pose_;
 
+  // Reacquisition covariance ramp: after this source drops out and returns, its
+  // absolute pose would snap the estimate off the dead-reckoned trajectory in one
+  // step. The position covariance of the first messages after the gap is inflated
+  // (scaled by outage length) and decayed over reacquisition_tau_s so the estimate
+  // slides back instead of snapping. Off unless reacquisition_tau_s > 0.
+  rclcpp::Time last_message_stamp_ {0, 0, RCL_ROS_TIME};
+  rclcpp::Time reacquisition_ramp_start_ {0, 0, RCL_ROS_TIME};
+  double reacquisition_initial_variance_ {0.0};
+  double reacquisition_initial_orient_variance_ {0.0};
+  bool in_reacquisition_ramp_ {false};
+
   // NOTE(CH3): Unique ptr to defer till we have the node interfaces from initialize()
   std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
   std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
