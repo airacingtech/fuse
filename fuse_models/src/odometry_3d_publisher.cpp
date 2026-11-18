@@ -31,8 +31,8 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-#include <tf2_ros/buffer.h>
-#include <tf2_ros/transform_listener.h>
+#include <tf2_ros/buffer.hpp>
+#include <tf2_ros/transform_listener.hpp>
 
 #include <algorithm>
 #include <chrono>
@@ -53,7 +53,7 @@
 #include <pluginlib/class_list_macros.hpp>
 #include <tf2_2d/tf2_2d.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
-#include <tf2/LinearMath/Transform.h>
+#include <tf2/LinearMath/Transform.hpp>
 
 // #include "covariance_geometry_ros/covariance_geometry_ros.hpp"
 // #include "covariance_geometry_ros/utils.hpp"

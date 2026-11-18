@@ -51,8 +51,8 @@ target_link_libraries(${PROJECT_NAME}
   fuse_variables::fuse_variables
   pluginlib::pluginlib
   ${std_srvs_TARGETS}
+  diagnostic_updater::diagnostic_updater
 )
-ament_target_dependencies(${PROJECT_NAME} diagnostic_updater)
 
 ## batch_optimizer node
 add_executable(batch_optimizer_node src/batch_optimizer_node.cpp)
